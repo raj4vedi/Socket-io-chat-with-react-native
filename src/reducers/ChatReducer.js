@@ -1,16 +1,20 @@
 import {
-  NAME_CHANGED,
+  NEW_MESSAGE,
 } from '../actions/types';
+
 const INITIAL_STATE = {
-  name: '',
-  loading : false,
+  messages: [],
 };
 
 export default (state = INITIAL_STATE, action) =>{
-  console.log(action);
+  console.log("ChatReducer  ", action);
   switch(action.type){
-    case NAME_CHANGED:
-        return {...state, name: action.payload};
+    case NEW_MESSAGE:{
+        let msgs = state.messages;
+        let newMsg = [...msgs]
+        newMsg.push(action.payload);
+        return {...state, messages: newMsg};
+      }
     default:
       return state;
   }

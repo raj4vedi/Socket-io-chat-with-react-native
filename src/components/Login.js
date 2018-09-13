@@ -34,6 +34,7 @@ class Login extends Component{
  }
 
   render(){
+        console.log("Rendering  Login",this.props.messages);
     return(
       <Card>
           <CardSection>

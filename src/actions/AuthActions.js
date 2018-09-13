@@ -1,7 +1,8 @@
 import {
   NAME_CHANGED,
   LOGIN_SUCCESS,
-  CREATE_SOCKET
+  CREATE_SOCKET,
+  NEW_MESSAGE
 } from './types';
 import {Actions} from 'react-native-router-flux';
 import openSocket from "socket.io-client";
@@ -66,6 +67,9 @@ const connectTimeout= (data, dispatch) =>{
 
 const newMessage= (data, dispatch) =>{
   console.log(data);
+  //var obj = JSON.parse(data);
+  let msg = {...data, type:'text'}
+  dispatch({type:NEW_MESSAGE, payload:msg})
 }
 const userJoined= (data, dispatch) =>{
   console.log(data);
