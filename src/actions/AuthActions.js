@@ -32,6 +32,16 @@ const connected= (socket, data, dispatch) =>{
   socket.on("login", data => loginEvent(data, dispatch));
   console.log("Connected");
     //dispatch({type: LOGIN_USER_FAIL});
+  //  setInterval(() => {
+
+    /*  if (socket.isConnected) {
+        console.log("Ping send");
+        socket.emit("ping", "name");
+      }else {
+        console.log("ping not connected");
+      }*/
+    //  socket.emit("ping", "");
+  // }, 5000);
 }
 
 const disconnected= (data, dispatch) =>{
