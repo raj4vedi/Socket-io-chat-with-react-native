@@ -2,7 +2,9 @@ import {
   NAME_CHANGED,
   LOGIN_SUCCESS,
   CREATE_SOCKET,
-  NEW_MESSAGE
+  NEW_MESSAGE,
+  MESSAGE_TYPED,
+  NEW_MESSAGE_SEND
 } from './types';
 import {Actions} from 'react-native-router-flux';
 import openSocket from "socket.io-client";
@@ -73,9 +75,13 @@ const newMessage= (data, dispatch) =>{
 }
 const userJoined= (data, dispatch) =>{
   console.log(data);
+  let msg = {...data, type:'joined'}
+  dispatch({type:NEW_MESSAGE, payload:msg})
 }
 const userLeft= (data, dispatch) =>{
   console.log(data);
+  let msg = {...data, type:'left'}
+  dispatch({type:NEW_MESSAGE, payload:msg})
 }
 const typing= (data, dispatch) =>{
   console.log(data);
@@ -92,10 +98,27 @@ export const nameChanged = (text) =>{
   };
 };
 
+export const messageTyped = (text) =>{
+  return{
+    type: MESSAGE_TYPED,
+    payload: text
+  };
+};
+
 export const loginUser = ({socket, name}) => {
   return(dispatch) => {
     //dispatch({type: LOGIN_USER});
-      socket.emit("add user", name)
+      socket.emit("add user", name);
+
+  }
+};
+
+export const sendMessage = ({socket, text, username}) => {
+  return(dispatch) => {
+    //dispatch({type: LOGIN_USER});
+      socket.emit("new message", text);
+      let msg = {username:username, message:text, type:'text'};
+      dispatch({type:NEW_MESSAGE_SEND, payload:msg});
 
   }
 };

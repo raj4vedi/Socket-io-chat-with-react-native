@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import AuthReducer from './AuthReducer';
+import ConnectionReducer from './ConnectionReducer';
 import ChatReducer from './ChatReducer';
 
 export default combineReducers({
-  auth: AuthReducer,
+  connection: ConnectionReducer,
   chat: ChatReducer,
 });

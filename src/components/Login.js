@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View} from 'react-native';
-import {Button, Card, CardSection, Input, Spinner} from './common';
+import {Button, Card, CardSection, Input, Spinner, Header} from './common';
 import {connect} from 'react-redux';
 import {readySocket, nameChanged, loginUser} from '../actions';
 
@@ -28,7 +28,7 @@ class Login extends Component{
    }
    return(
      <Button onPress = {this.onButtonPress.bind(this)}>
-         Log in
+         Continue
      </Button>
    );
  }
@@ -36,28 +36,31 @@ class Login extends Component{
   render(){
         console.log("Rendering  Login",this.props.messages);
     return(
-      <Card>
-          <CardSection>
-              <Input
-                  label= "Name"
-                  placeholder = "jane"
-                  onChangeText = {this.onNameChange.bind(this)}
-                  value = {this.props.name}
-              />
-          </CardSection>
+      <View>
+        <Header headerText='Login'/>
+        <Card style = {{marginTop:200}}>
+            <CardSection>
+                <Input
+                    label= "Name"
+                    placeholder = "Enter name..."
+                    onChangeText = {this.onNameChange.bind(this)}
+                    value = {this.props.name}
+                />
+            </CardSection>
 
-          <CardSection>
-              {this.renderButton()}
-          </CardSection>
-      </Card>
+            <CardSection>
+                {this.renderButton()}
+            </CardSection>
+        </Card>
+      </View>
     );
   }
 
 }
 
 
-const mapStateToProps = ({auth}) =>{
-  const {name, loading, socket} = auth;
+const mapStateToProps = ({connection}) =>{
+  const {name, loading, socket} = connection;
 
   return{name, loading, socket};
 };
